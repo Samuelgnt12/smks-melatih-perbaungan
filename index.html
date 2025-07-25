@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X-TKJ | SMK Swasta Melati Perbaungan</title>
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --glass: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        /* Dark Mode Colors */
+        body.dark-mode {
+            --light: #121212;
+            --dark: #f5f5f5;
+            --glass: rgba(30, 30, 30, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+        
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            opacity: 0.1;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        header {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--dark);
+            padding: 1rem 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: var(--glass-shadow);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(44, 62, 80, 0.9);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-right: 15px;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+            transition: transform 0.3s;
+        }
+        
+        .logo:hover img {
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            color: var(--dark);
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            color: var(--dark);
+        }
+        
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('assets/foto1.jpg') center/cover no-repeat;
+            z-index: -1;
+            filter: brightness(0.7);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+        
+        .main-content {
+            padding-top: 100px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 3rem 0;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 40px;
+            height: 200%;
+            background: rgba(255,255,255,0.2);
+            transform: rotate(30deg);
+            transition: all 0.3s;
+        }
+        
+        .section-title h2:hover::after {
+            left: 120%;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 5rem;
+            perspective: 1000px;
+        }
+        
+        .feature-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .feature-card {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .feature-card:hover::before {
+            height: 10px;
+        }
+        
+        .feature-card i {
+            font-size: 3.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover i {
+            transform: scale(1.2);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-size: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .feature-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+        
+        .feature-card:hover h3::after {
+            width: 100%;
+        }
+        
+        .feature-card p {
+            color: var(--dark);
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+        
+        .entertainment {
+            background: var(--light);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 5rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .entertainment {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .entertainment::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: var(--gradient);
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .entertainment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .entertainment-item {
+            background: var(--light);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        
+        body.dark-mode .entertainment-item {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .entertainment-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+        
+        .entertainment-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .entertainment-item:hover::before {
+            opacity: 0.1;
+        }
+        
+        .entertainment-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .entertainment-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .entertainment-item p {
+            padding: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+            position: relative;
+            z-index: 2;
+            background: var(--light);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .modal.show {
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: var(--light);
+            width: 90%;
+            max-width: 600px;
+            border-radius: 15px;
+            overflow: hidden;
+            transform: scale(0.8);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .modal-content {
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-header {
+            background: var(--gradient);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modal-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255,255,255,0.3) 0%,
+                rgba(255,255,255,0) 60%
+            );
+            transform: rotate(30deg);
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 2rem;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .option-list {
+            list-style: none;
+        }
+        
+        .option-list li {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        body.dark-mode .option-list li {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .option-list li:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+            transform: translateX(5px);
+        }
+        
+        body.dark-mode .option-list li:hover {
+            background-color: rgba(52, 152, 219, 0.2);
+        }
+        
+        .option-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-info {
+            display: none;
+            padding: 1rem;
+            background-color: rgba(0,0,0,0.05);
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: var(--dark);
+            border-left: 4px solid var(--primary);
+            animation: fadeIn 0.3s;
+        }
+        
+        body.dark-mode .detail-info {
+            background-color: rgba(255,255,255,0.05);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .fab:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 4rem 0 2rem;
+            margin-top: 5rem;
+            position: relative;
+        }
+        
+        .wave {
+            position: absolute;
+            top: -100px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%232c3e50"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%232c3e50"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,233.88-22.45V0Z" fill="%232c3e50"/></svg>');
+            background-size: cover;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Student Avatar Styles */
+        .student-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .student-info {
+            text-align: left;
+            flex-grow: 1;
+        }
+        
+        .student-info strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+        
+        .student-info span {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            display: block;
+        }
+        
+        /* Achievement Badges */
+        .achievement-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .gold {
+            background: linear-gradient(to right, #FFD700, #D4AF37);
+            color: #333;
+        }
+        
+        .silver {
+            background: linear-gradient(to right, #C0C0C0, #A8A8A8);
+            color: #333;
+        }
+        
+        .bronze {
+            background: linear-gradient(to right, #CD7F32, #A67C52);
+            color: white;
+        }
+        
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--dark);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Search Box */
+        .search-box {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            border-radius: 25px;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: var(--light);
+            color: var(--dark);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        body.dark-mode .search-box input {
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--dark);
+            opacity: 0.7;
+        }
+        
+        /* Time Badge */
+        .time-badge {
+            background: var(--gradient);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+        
+        .tab-btn {
+            padding: 8px 15px;
+            background: rgba(0,0,0,0.05);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        body.dark-mode .tab-btn {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .tab-btn.active {
+            background: var(--gradient);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+            
+            .section-title h2 {
+                font-size: 1.3rem;
+                padding: 0.6rem 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <header id="mainHeader">
+        <div class="container">
+            <div class="logo">
+                <img src="assets/school-logo.png" alt="Logo SMK Melati">
+                <div class="logo-text">
+                    <h1>Kelas X-TKJ</h1>
+                    <p>SMK Swasta Melati Perbaungan</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to X-TKJ Class</h1>
+            <p>Teknik Komputer dan Jaringan - SMK Swasta Melati Perbaungan</p>
+            <button class="btn" onclick="scrollToContent()">Explore More</button>
+        </div>
+        <div class="scroll-down" onclick="scrollToContent()">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+    
+    <main class="main-content">
+        <div class="container">
+            <div class="section-title">
+                <h2>Fitur Kelas Kami</h2>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card" id="siswaBtn">
+                    <i class="fas fa-users"></i>
+                    <h3>Daftar Siswa</h3>
+                    <p>Lihat profil semua siswa kelas X-TKJ dengan detail lengkap</p>
+                </div>
+                
+                <div class="feature-card" id="jadwalBtn">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Jadwal Pelajaran</h3>
+                    <p>Jadwal lengkap pelajaran harian dan kegiatan kelas kami</p>
+                </div>
+                
+                <div class="feature-card" id="prestasiBtn">
+                    <i class="fas fa-trophy"></i>
+                    <h3>Prestasi</h3>
+                    <p>Prestasi yang telah diraih oleh siswa kelas kami</p>
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <h2>Hiburan Kelas</h2>
+            </div>
+            
+            <div class="entertainment">
+                <div class="entertainment-grid">
+                    <div class="entertainment-item" id="musicBtn">
+                        <img src="assets/foto2.jpg" alt="Musik Kelas">
+                        <p>Musik Kelas</p>
+                    </div>
+                    
+                    <div class="entertainment-item" id="gamesBtn">
+                        <img src="assets/games.jpg" alt="Games">
+                        <p>Games Seru</p>
+                    </div>
+                    
+                    <div class="entertainment-item" id="memesBtn">
+                        <img src="assets/memes.jpg" alt="Memes Kelas">
+                        <p>Memes Kelas</p>
+                    </div>
+                    
+                    <div class="entertainment-item" id="fotoBtn">
+                        <img src="assets/galeri.jpg" alt="Galeri Foto">
+                        <p>Galeri Foto</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <h2>Statistik Kelas</h2>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>4 Siswa</h3>
+                    <p>Total siswa aktif di kelas X-TKJ</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>12 Guru</h3>
+                    <p>Pengajar yang mendidik kelas kami</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-medal"></i>
+                    <h3>1+ Prestasi</h3>
+                    <p>Pencapaian yang telah diraih</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Modal Windows -->
+    <div class="modal" id="siswaModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Daftar Siswa X-TKJ</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="search-box">
+                    <input type="text" placeholder="Cari siswa..." id="searchStudent">
+                    <i class="fas fa-search"></i>
+                </div>
+                <ul class="option-list" id="studentList">
+                    <li data-detail="Pratama Wijaya (Tama)|Lahir: Medan, 15 Januari 2008<br>Alamat: Medan, Sukaramai Dusun 9<br>Hobi: Programming<br>Keahlian: Web Development<br>Jabatan: Ketua Kelas">
+                        <div class="student-avatar" style="background-color: #3498db;">PW</div>
+                        <div class="student-info">
+                            <strong>Pratama Wijaya (Tama)</strong>
+                            <span>Ketua Kelas</span>
+                        </div>
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Iqbal Mahdani|Lahir: Perbaungan, 22 Februari 2008<br>Alamat: Medan, Melati Gang Jering<br>Hobi: Desain Grafis<br>Keahlian: UI/UX Design<br>Jabatan: Wakil Ketua">
+                        <div class="student-avatar" style="background-color: #e74c3c;">IM</div>
+                        <div class="student-info">
+                            <strong>Iqbal Mahdani</strong>
+                            <span>Wakil Ketua</span>
+                        </div>
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Ferzio|Lahir: Medan, 3 Maret 2008<br>Alamat: Medan, Desa Ujung Rambah<br>Hobi: Jaringan Komputer<br>Keahlian: Networking<br>Jabatan: Sekretaris">
+                        <div class="student-avatar" style="background-color: #2ecc71;">FZ</div>
+                        <div class="student-info">
+                            <strong>Ferzio</strong>
+                            <span>Sekretaris</span>
+                        </div>
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Aldo Bastian|Lahir: Perbaungan, 10 April 2008<br>Alamat: Medan, Sukajadi<br>Hobi: Hardware<br>Keahlian: PC Building<br>Jabatan: Bendahara">
+                        <div class="student-avatar" style="background-color: #9b59b6;">AB</div>
+                        <div class="student-info">
+                            <strong>Aldo Bastian</strong>
+                            <span>Bendahara</span>
+                        </div>
+                        <div class="detail-info"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="jadwalModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Jadwal Pelajaran</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="senin">Senin</button>
+                    <button class="tab-btn" data-tab="selasa">Selasa</button>
+                    <button class="tab-btn" data-tab="rabu">Rabu</button>
+                    <button class="tab-btn" data-tab="kamis">Kamis</button>
+                    <button class="tab-btn" data-tab="jumat">Jumat</button>
+                    <button class="tab-btn" data-tab="sabtu">Sabtu</button>
+                </div>
+                
+                <div class="tab-content active" id="senin">
+                    <ul class="option-list">
+                        <li data-detail="Matematika|Waktu: 07.30-09.00<br>Guru: Pak Budi<br>Ruangan: A12<br>Catatan: Bawa kalkulator">
+                            Matematika
+                            <span class="time-badge">07.30-09.00</span>
+                            <div class="detail-info"></div>
+                        </li>
+                        <li data-detail="Bahasa Indonesia|Waktu: 09.15-10.45<br>Guru: Bu Ani<br>Ruangan: A12<br>Catatan: Presentasi kelompok">
+                            Bahasa Indonesia
+                            <span class="time-badge">09.15-10.45</span>
+                            <div class="detail-info"></div>
+                        </li>
+                        <li data-detail="TKJ Dasar|Waktu: 11.00-12.30<br>Guru: Pak Joko<br>Ruangan: Lab Komputer 1<br>Catatan: Praktikum jaringan">
+                            TKJ Dasar
+                            <span class="time-badge">11.00-12.30</span>
+                            <div class="detail-info"></div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content" id="selasa">
+                    <ul class="option-list">
+                        <li data-detail="Bahasa Inggris|Waktu: 07.30-09.00<br>Guru: Bu Diana<br>Ruangan: A12<br>Catatan: Tes listening">
+                            Bahasa Inggris
+                            <span class="time-badge">07.30-09.00</span>
+                            <div class="detail-info"></div>
+                        </li>
+                        <li data-detail="PPKN|Waktu: 09.15-10.45<br>Guru: Pak Heru<br>Ruangan: A12<br>Catatan: Diskusi kelompok">
+                            PPKN
+                            <span class="time-badge">09.15-10.45</span>
+                            <div class="detail-info"></div>
+                        </li>
+                        <li data-detail="Fisika|Waktu: 11.00-12.30<br>Guru: Bu Rina<br>Ruangan: Lab Fisika<br>Catatan: Praktikum listrik">
+                            Fisika
+                            <span class="time-badge">11.00-12.30</span>
+                            <div class="detail-info"></div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content" id="rabu">
+                    <ul class="option-list">
+                        <li data-detail="Kimia|Waktu: 07.30-09.00<br>Guru: Bu Siti<br>Ruangan: A12<br>Catatan: Bawa alat praktikum">
+                            Kimia
+                            <span class="time-badge">07.30-09.00</span>
+                            <div class="detail-info"></div>
+                        </li>
+                        <li data-detail="Olahraga|Waktu: 09.15-10.45<br>Guru: Pak Andi<br>Ruangan: Lapangan<br>Catatan: Bawa baju olahraga">
+                            Olahraga
+                            <span class="time-badge">09.15-10.45</span>
+                            <div class="detail-info"></div>
+                        </li>
+                        <li data-detail="Seni Budaya|Waktu: 11.00-12.30<br>Guru: Bu Lina<br>Ruangan: Aula<br>Catatan: Persiapan pentas seni">
+                            Seni Budaya
+                            <span class="time-badge">11.00-12.30</span>
+                            <div class="detail-info"></div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content" id="kamis">
+                    <ul class="option-list">
+                        <li data-detail="TKJ Lanjutan|Waktu: 07.30-09.00<br>Guru: Pak Joko<br>Ruangan: Lab Komputer 1<br>Catatan: Praktikum jaringan">
+                            TKJ Lanjutan
+                            <span class="time-badge">07.30-09.00</span>
+                            <div class="detail-info"></div>
+                        </li>
+                        <li data-detail="Matematika|Waktu: 09.15-10.45<br>Guru: Pak Budi<br>Ruangan: A12<br>Catatan: Ujian tengah semester">
+                            Matematika
+                            <span class="time-badge">09.15-10.45</span>
+                            <div class="detail-info"></div>
+                        </li>
+                        <li data-detail="Bahasa Inggris|Waktu: 11.00-12.30<br>Guru: Bu Diana<br>Ruangan: A12<br>Catatan: Presentasi proyek">
+                            Bahasa Inggris
+                            <span class="time-badge">11.00-12.30</span>
+                            <div class="detail-info"></div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content" id="jumat">
+                    <ul class="option-list">
+                        <li data-detail="Agama|Waktu: 07.30-09.00<br>Guru: Pak Ahmad<br>Ruangan: A12<br>Catatan: Diskusi kelompok">
+                            Agama
+                            <span class="time-badge">07.30-09.00</span>
+                            <div class="detail-info"></div>
+                        </li>
+                        <li data-detail="BK|Waktu: 09.15-10.45<br>Guru: Bu Rita<br>Ruangan: A12<br>Catatan: Persiapan karier">
+                            BK
+                            <span class="time-badge">09.15-10.45</span>
+                            <div class="detail-info"></div>
+                        </li>
+                        <li data-detail="Praktikum TKJ|Waktu: 11.00-12.30<br>Guru: Pak Joko<br>Ruangan: Lab Komputer 1<br>Catatan: Bawa laptop">
+                            Praktikum TKJ
+                            <span class="time-badge">11.00-12.30</span>
+                            <div class="detail-info"></div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content" id="sabtu">
+                    <ul class="option-list">
+                        <li data-detail="Ekstrakurikuler|Waktu: 08.00-11.00<br>Pilihan:<br>• Web Design<br>• Robotik<br>• English Club<br>• Olahraga">
+                            Ekstrakurikuler
+                            <span class="time-badge">08.00-11.00</span>
+                            <div class="detail-info"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="prestasiModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Prestasi Kelas</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="achievement-timeline">
+                    <div class="achievement-item">
+                        <div class="achievement-date">2023</div>
+                        <div class="achievement-content">
+                            <h4>Juara 4 Lomba LKS Tingkat Provinsi</h4>
+                            <p>Meraih juara 4 dalam Lomba Kompetensi Siswa tingkat provinsi untuk jurusan TAV dan Busana Butik</p>
+                            <div class="achievement-badge">
+                                <i class="fas fa-award"></i> Juara 4
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="musicModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Musik Kelas</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul class="option-list">
+                    <li data-detail="Lagu Kelas Favorit|1. Monokrom - Tulus<br>2. Halu - Feby Putri<br>3. Runtuh - Feby Putri ft Fiersa Besari<br>4. Pesan Terakhir - Lyodra">
+                        Lagu Kelas Favorit
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Penampilan Musik Siswa|• Bella - Cover 'Halu'<br>• Joko - Cover 'Pesan Terakhir'<br>• Grup Band Kelas - 'Lagu Kreasi Sendiri'">
+                        Penampilan Musik Siswa
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Playlist Belajar|1. Lofi Hip Hop Mix<br>2. Instrumental Piano<br>3. White Noise untuk Fokus<br>4. Musik Klasik">
+                        Playlist Belajar
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Cover Lagu oleh Kelas|Kelas kami pernah membuat cover lagu 'Halu' dengan aransemen khusus dan video klip yang dibuat oleh tim multimedia kelas.">
+                        Cover Lagu oleh Kelas
+                        <div class="detail-info"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="gamesModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Games Seru</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul class="option-list">
+                    <li data-detail="Teknik Jeopardy|Game kuis tentang pengetahuan teknik komputer dengan sistem poin seperti acara Jeopardy. Dibagi menjadi 3 kategori: Hardware, Software, dan Networking.">
+                        Teknik Jeopardy
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Kuis Komputer|Kuis cepat tentang komponen komputer, sejarah teknologi, dan istilah-istilah IT. Pemenang akan mendapat hadiah kecil dari kelas.">
+                        Kuis Komputer
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Simulasi Jaringan|Game simulasi membangun jaringan komputer dengan budget terbatas. Peserta harus memilih peralatan jaringan yang tepat untuk membangun jaringan yang efisien.">
+                        Simulasi Jaringan
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Teka-Teki Coding|Game teka-teki logika pemrograman dimana peserta harus menyusun kode untuk menyelesaikan masalah tertentu dalam waktu terbatas.">
+                        Teka-Teki Coding
+                        <div class="detail-info"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="memesModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Memes Kelas</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul class="option-list">
+                    <li data-detail="Memes Ujian|Koleksi memes lucu tentang situasi saat ujian, ketiduran saat belajar, dan ekspresi saat menerima hasil ujian.">
+                        Memes Ujian
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Memes Guru|Memes tentang kebiasaan unik para guru kami yang dibuat dengan penuh rasa hormat dan kecintaan.">
+                        Memes Guru
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Memes Tugas|Memes tentang menumpuknya tugas, deadline yang mepet, dan perjuangan mengerjakan tugas kelompok.">
+                        Memes Tugas
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Memes Kehidupan Sekolah|Memes tentang kegiatan sehari-hari di sekolah, mulai dari seragam yang lupa disetrika sampai berebut tempat duduk di kantin.">
+                        Memes Kehidupan Sekolah
+                        <div class="detail-info"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="fotoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Galeri Foto</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul class="option-list">
+                    <li data-detail="Kegiatan Belajar|Foto-foto saat proses belajar di kelas, praktikum di lab komputer, dan diskusi kelompok.">
+                        Kegiatan Belajar
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Acara Sekolah|Foto saat upacara bendera, pentas seni, dan acara-acara khusus di sekolah.">
+                        Acara Sekolah
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Study Tour|Foto-foto saat kunjungan industri ke perusahaan IT dan tempat-tempat edukatif lainnya.">
+                        Study Tour
+                        <div class="detail-info"></div>
+                    </li>
+                    <li data-detail="Foto Kelas|Foto bersama kelas, foto candid saat istirahat, dan momen-momen tidak terduga lainnya.">
+                        Foto Kelas
+                        <div class="detail-info"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="fab" id="contactBtn">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+    
+    <div class="dark-mode-toggle" id="darkModeBtn">
+        <i class="fas fa-moon"></i>
+    </div>
+    
+    <footer>
+        <div class="wave"></div>
+        <div class="container">
+            <h3>Kelas X-TKJ SMK Swasta Melati Perbaungan</h3>
+            <p>Tahun Ajaran 2023/2024</p>
+            
+            <div class="footer-links">
+                <a href="#">Tentang Kami</a>
+                <a href="#">Galeri</a>
+                <a href="#">Prestasi</a>
+                <a href="#">Kontak</a>
+                <a href="#">Blog</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+            
+            <p>&copy; 2023 X-TKJ. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Fungsi untuk membuka modal
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+            }
+        }
+        
+        // Fungsi untuk menutup modal
+        function closeModal() {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 300);
+            });
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Fungsi untuk menampilkan detail
+        function showDetail(element, title, content) {
+            const allDetails = document.querySelectorAll('.detail-info');
+            allDetails.forEach(detail => {
+                if (detail !== element.querySelector('.detail-info')) {
+                    detail.style.display = 'none';
+                }
+            });
+            
+            const detailInfo = element.querySelector('.detail-info');
+            if (detailInfo.style.display === 'block') {
+                detailInfo.style.display = 'none';
+            } else {
+                detailInfo.innerHTML = `<strong>${title}</strong><br>${content}`;
+                detailInfo.style.display = 'block';
+            }
+        }
+        
+        // Event listener untuk semua tombol
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tombol utama
+            document.getElementById('siswaBtn').addEventListener('click', () => openModal('siswaModal'));
+            document.getElementById('jadwalBtn').addEventListener('click', () => openModal('jadwalModal'));
+            document.getElementById('prestasiBtn').addEventListener('click', () => openModal('prestasiModal'));
+            
+            // Tombol hiburan
+            document.getElementById('musicBtn').addEventListener('click', () => openModal('musicModal'));
+            document.getElementById('gamesBtn').addEventListener('click', () => openModal('gamesModal'));
+            document.getElementById('memesBtn').addEventListener('click', () => openModal('memesModal'));
+            document.getElementById('fotoBtn').addEventListener('click', () => openModal('fotoModal'));
+            
+            // Tombol close modal
+            document.querySelectorAll('.close-modal').forEach(btn => {
+                btn.addEventListener('click', closeModal);
+            });
+            
+            // Tombol dark mode
+            document.getElementById('darkModeBtn').addEventListener('click', toggleDarkMode);
+            
+            // Tombol contact
+            document.getElementById('contactBtn').addEventListener('click', openContactForm);
+            
+            // Scroll down button
+            document.querySelector('.scroll-down').addEventListener('click', scrollToContent);
+            
+            // Tab system
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons and contents
+                    document.querySelectorAll('.tab-btn').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button and corresponding content
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Detail info system
+            document.querySelectorAll('.option-list li').forEach(item => {
+                item.addEventListener('click', function() {
+                    const detailData = this.getAttribute('data-detail').split('|');
+                    showDetail(this, detailData[0], detailData[1]);
+                });
+            });
+            
+            // Search functionality
+            const searchInput = document.getElementById('searchStudent');
+            if (searchInput) {
+                searchInput.addEventListener('input', function() {
+                    const query = this.value.toLowerCase();
+                    const students = document.querySelectorAll('#studentList li');
+                    
+                    students.forEach(student => {
+                        const name = student.querySelector('strong').textContent.toLowerCase();
+                        if (name.includes(query)) {
+                            student.style.display = 'flex';
+                        } else {
+                            student.style.display = 'none';
+                        }
+                    });
+                });
+            }
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target.classList.contains('modal')) {
+                closeModal();
+            }
+        });
+        
+        // Scroll to content
+        function scrollToContent() {
+            document.querySelector('.main-content').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        // Dark mode toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.dark-mode-toggle i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+        
+        // Open contact form
+        function openContactForm() {
+            alert('Fitur kontak akan segera tersedia!');
+        }
+        
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.feature-card, .entertainment-item, .section-title');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Set initial animation states
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.feature-card, .entertainment-item').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.5s ease';
+            });
+            
+            document.querySelectorAll('.section-title').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'all 0.5s ease 0.2s';
+            });
+            
+            setTimeout(() => {
+                animateOnScroll();
+            }, 500);
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>
