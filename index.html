@@ -37,7 +37,7 @@
             --light: #121212;
             --dark: #f5f5f5;
             --glass: rgba(30, 30, 30, 0.8);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255,255,255,0.1);
         }
         
         .bg-animation {
@@ -804,6 +804,181 @@
         .tab-content.active {
             display: block;
         }
+
+        /* Tambahan CSS untuk fitur absensi */
+        .attendance-status {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+        
+        .status-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            flex: 1;
+            margin: 0 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-top: 3px solid var(--primary);
+        }
+        
+        body.dark-mode .status-card {
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+        
+        .status-card h4 {
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        
+        .status-card p {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .present {
+            border-top-color: var(--secondary);
+        }
+        
+        .late {
+            border-top-color: #f39c12;
+        }
+        
+        .absent {
+            border-top-color: var(--accent);
+        }
+        
+        .attendance-form {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .attendance-form {
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group select, 
+        .form-group input {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: var(--light);
+            color: var(--dark);
+        }
+        
+        body.dark-mode .form-group select,
+        body.dark-mode .form-group input {
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .submit-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .attendance-list {
+            margin-top: 1.5rem;
+        }
+        
+        .attendance-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .attendance-item {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .attendance-item:last-child {
+            border-bottom: none;
+        }
+        
+        .student-name {
+            flex: 2;
+        }
+        
+        .attendance-time {
+            flex: 1;
+            text-align: right;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .attendance-badge {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .badge-present {
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--secondary);
+        }
+        
+        .badge-late {
+            background: rgba(243, 156, 18, 0.2);
+            color: #f39c12;
+        }
+        
+        .badge-absent {
+            background: rgba(231, 76, 60, 0.2);
+            color: var(--accent);
+        }
+        
+        .date-info {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .date-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .date-info p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .empty-message {
+            text-align: center;
+            padding: 1rem;
+            color: var(--dark);
+            opacity: 0.7;
+            font-style: italic;
+        }
         
         @media (max-width: 768px) {
             .hero h1 {
@@ -825,6 +1000,15 @@
             .section-title h2 {
                 font-size: 1.3rem;
                 padding: 0.6rem 1.5rem;
+            }
+            
+            .attendance-status {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .status-card {
+                margin: 0;
             }
         }
     </style>
@@ -880,6 +1064,12 @@
                     <i class="fas fa-trophy"></i>
                     <h3>Prestasi</h3>
                     <p>Prestasi yang telah diraih oleh siswa kelas kami</p>
+                </div>
+
+                <div class="feature-card" id="absensiBtn">
+                    <i class="fas fa-clipboard-check"></i>
+                    <h3>Absensi Digital</h3>
+                    <p>Catat kehadiran siswa secara digital dan real-time</p>
                 </div>
             </div>
             
@@ -1254,6 +1444,158 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Absensi Digital -->
+    <div class="modal" id="absensiModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Absensi Digital Kelas X-TKJ</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="absensi-hari-ini">Hari Ini</button>
+                    <button class="tab-btn" data-tab="riwayat-absensi">Riwayat</button>
+                    <button class="tab-btn" data-tab="statistik-absensi">Statistik</button>
+                </div>
+                
+                <div class="tab-content active" id="absensi-hari-ini">
+                    <div class="date-info">
+                        <h4 id="current-date"></h4>
+                        <p id="current-time"></p>
+                    </div>
+                    
+                    <div class="attendance-status">
+                        <div class="status-card present">
+                            <h4>Hadir</h4>
+                            <p id="present-count">0</p>
+                        </div>
+                        <div class="status-card late">
+                            <h4>Terlambat</h4>
+                            <p id="late-count">0</p>
+                        </div>
+                        <div class="status-card absent">
+                            <h4>Tidak Hadir</h4>
+                            <p id="absent-count">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="attendance-form">
+                        <div class="form-group">
+                            <label for="student-select">Nama Siswa</label>
+                            <select id="student-select">
+                                <option value="">Pilih Siswa</option>
+                                <option value="1">Pratama Wijaya (Tama)</option>
+                                <option value="2">Iqbal Mahdani</option>
+                                <option value="3">Ferzio</option>
+                                <option value="4">Aldo Bastian</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="attendance-status">Status Kehadiran</label>
+                            <select id="attendance-status">
+                                <option value="present">Hadir</option>
+                                <option value="late">Terlambat</option>
+                                <option value="absent">Tidak Hadir</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group" id="late-reason-container" style="display: none;">
+                            <label for="late-reason">Alasan Terlambat</label>
+                            <input type="text" id="late-reason" placeholder="Masukkan alasan terlambat">
+                        </div>
+                        
+                        <button class="submit-btn" id="submit-attendance">Simpan Absensi</button>
+                    </div>
+                    
+                    <div class="attendance-list">
+                        <h4>Daftar Kehadiran Hari Ini</h4>
+                        <div id="today-attendance-list">
+                            <!-- Data absensi akan dimasukkan di sini oleh JavaScript -->
+                            <p class="empty-message">Belum ada data absensi hari ini</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="riwayat-absensi">
+                    <div class="search-box">
+                        <input type="text" placeholder="Cari berdasarkan nama atau tanggal..." id="search-history">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="filter-month">Filter Bulan</label>
+                        <select id="filter-month">
+                            <option value="all">Semua Bulan</option>
+                            <option value="1">Januari</option>
+                            <option value="2">Februari</option>
+                            <option value="3">Maret</option>
+                            <option value="4">April</option>
+                            <option value="5">Mei</option>
+                            <option value="6">Juni</option>
+                            <option value="7">Juli</option>
+                            <option value="8">Agustus</option>
+                            <option value="9">September</option>
+                            <option value="10">Oktober</option>
+                            <option value="11">November</option>
+                            <option value="12">Desember</option>
+                        </select>
+                    </div>
+                    
+                    <div class="attendance-list">
+                        <div id="attendance-history-list">
+                            <!-- Data riwayat absensi akan dimasukkan di sini oleh JavaScript -->
+                            <p class="empty-message">Belum ada data riwayat absensi</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="statistik-absensi">
+                    <div class="form-group">
+                        <label for="stats-month">Pilih Bulan</label>
+                        <select id="stats-month">
+                            <option value="1">Januari</option>
+                            <option value="2">Februari</option>
+                            <option value="3">Maret</option>
+                            <option value="4">April</option>
+                            <option value="5">Mei</option>
+                            <option value="6">Juni</option>
+                            <option value="7">Juli</option>
+                            <option value="8">Agustus</option>
+                            <option value="9">September</option>
+                            <option value="10">Oktober</option>
+                            <option value="11">November</option>
+                            <option value="12">Desember</option>
+                        </select>
+                    </div>
+                    
+                    <div class="attendance-status">
+                        <div class="status-card">
+                            <h4>Rata-rata Kehadiran</h4>
+                            <p id="avg-attendance">0%</p>
+                        </div>
+                        <div class="status-card late">
+                            <h4>Total Terlambat</h4>
+                            <p id="total-late">0</p>
+                        </div>
+                        <div class="status-card absent">
+                            <h4>Total Tidak Hadir</h4>
+                            <p id="total-absent">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="attendance-list">
+                        <h4>Statistik per Siswa</h4>
+                        <div id="student-stats-list">
+                            <!-- Data statistik akan dimasukkan di sini oleh JavaScript -->
+                            <p class="empty-message">Pilih bulan untuk melihat statistik</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="fab" id="contactBtn">
         <i class="fas fa-comment-dots"></i>
@@ -1348,6 +1690,7 @@
             document.getElementById('siswaBtn').addEventListener('click', () => openModal('siswaModal'));
             document.getElementById('jadwalBtn').addEventListener('click', () => openModal('jadwalModal'));
             document.getElementById('prestasiBtn').addEventListener('click', () => openModal('prestasiModal'));
+            document.getElementById('absensiBtn').addEventListener('click', () => openModal('absensiModal'));
             
             // Tombol hiburan
             document.getElementById('musicBtn').addEventListener('click', () => openModal('musicModal'));
@@ -1481,6 +1824,374 @@
         });
         
         window.addEventListener('scroll', animateOnScroll);
+
+        /* ==================== */
+        /* FITUR ABSENSI DIGITAL */
+        /* ==================== */
+
+        // Fungsi untuk mengupdate tanggal dan waktu
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('id-ID', options);
+            document.getElementById('current-time').textContent = now.toLocaleTimeString('id-ID');
+        }
+        
+        // Update waktu setiap detik
+        setInterval(updateDateTime, 1000);
+        updateDateTime(); // Panggil sekali saat pertama kali load
+        
+        // Toggle alasan terlambat berdasarkan status kehadiran
+        document.getElementById('attendance-status').addEventListener('change', function() {
+            const lateReasonContainer = document.getElementById('late-reason-container');
+            if (this.value === 'late') {
+                lateReasonContainer.style.display = 'block';
+            } else {
+                lateReasonContainer.style.display = 'none';
+            }
+        });
+        
+        // Data absensi contoh (dalam aplikasi nyata, ini bisa dari database)
+        let attendanceData = [
+            {
+                id: 1,
+                studentId: 1,
+                studentName: "Pratama Wijaya (Tama)",
+                date: new Date().toISOString().split('T')[0],
+                time: "07:30",
+                status: "present",
+                lateReason: ""
+            },
+            {
+                id: 2,
+                studentId: 2,
+                studentName: "Iqbal Mahdani",
+                date: new Date().toISOString().split('T')[0],
+                time: "07:45",
+                status: "late",
+                lateReason: "Macet di jalan"
+            },
+            {
+                id: 3,
+                studentId: 3,
+                studentName: "Ferzio",
+                date: new Date().toISOString().split('T')[0],
+                time: "07:25",
+                status: "present",
+                lateReason: ""
+            },
+            // Data contoh untuk bulan sebelumnya
+            {
+                id: 4,
+                studentId: 1,
+                studentName: "Pratama Wijaya (Tama)",
+                date: "2023-09-15",
+                time: "07:30",
+                status: "present",
+                lateReason: ""
+            },
+            {
+                id: 5,
+                studentId: 2,
+                studentName: "Iqbal Mahdani",
+                date: "2023-09-15",
+                time: "08:15",
+                status: "late",
+                lateReason: "Bangun kesiangan"
+            },
+            {
+                id: 6,
+                studentId: 4,
+                studentName: "Aldo Bastian",
+                date: "2023-09-15",
+                time: "",
+                status: "absent",
+                lateReason: ""
+            }
+        ];
+        
+        // Fungsi untuk menampilkan absensi hari ini
+        function showTodayAttendance() {
+            const today = new Date().toISOString().split('T')[0];
+            const todayAttendance = attendanceData.filter(record => record.date === today);
+            const listContainer = document.getElementById('today-attendance-list');
+            
+            // Update counter
+            document.getElementById('present-count').textContent = 
+                todayAttendance.filter(a => a.status === 'present').length;
+            document.getElementById('late-count').textContent = 
+                todayAttendance.filter(a => a.status === 'late').length;
+            document.getElementById('absent-count').textContent = 
+                4 - todayAttendance.length; // Total siswa 4
+            
+            if (todayAttendance.length === 0) {
+                listContainer.innerHTML = '<p class="empty-message">Belum ada data absensi hari ini</p>';
+                return;
+            }
+            
+            listContainer.innerHTML = '';
+            todayAttendance.forEach(record => {
+                const badgeClass = record.status === 'present' ? 'badge-present' : 
+                                 record.status === 'late' ? 'badge-late' : 'badge-absent';
+                const badgeText = record.status === 'present' ? 'Hadir' : 
+                                record.status === 'late' ? 'Terlambat' : 'Tidak Hadir';
+                
+                const item = document.createElement('div');
+                item.className = 'attendance-item';
+                item.innerHTML = `
+                    <div class="student-name">${record.studentName}</div>
+                    <div class="attendance-badge ${badgeClass}">${badgeText}</div>
+                    <div class="attendance-time">${record.time}</div>
+                `;
+                
+                if (record.status === 'late' && record.lateReason) {
+                    item.innerHTML += `<div class="late-reason" style="flex:100%;font-size:0.8rem;margin-top:5px;">Alasan: ${record.lateReason}</div>`;
+                }
+                
+                listContainer.appendChild(item);
+            });
+        }
+        
+        // Fungsi untuk menampilkan riwayat absensi
+        function showAttendanceHistory() {
+            const searchQuery = document.getElementById('search-history').value.toLowerCase();
+            const selectedMonth = document.getElementById('filter-month').value;
+            const listContainer = document.getElementById('attendance-history-list');
+            
+            let filteredData = [...attendanceData];
+            
+            // Filter berdasarkan bulan
+            if (selectedMonth !== 'all') {
+                filteredData = filteredData.filter(record => {
+                    const recordMonth = new Date(record.date).getMonth() + 1;
+                    return recordMonth.toString() === selectedMonth;
+                });
+            }
+            
+            // Filter berdasarkan pencarian
+            if (searchQuery) {
+                filteredData = filteredData.filter(record => 
+                    record.studentName.toLowerCase().includes(searchQuery) || 
+                    record.date.includes(searchQuery)
+                );
+            }
+            
+            if (filteredData.length === 0) {
+                listContainer.innerHTML = '<p class="empty-message">Tidak ada data yang sesuai dengan filter</p>';
+                return;
+            }
+            
+            listContainer.innerHTML = '';
+            
+            // Kelompokkan berdasarkan tanggal
+            const groupedByDate = filteredData.reduce((acc, record) => {
+                if (!acc[record.date]) {
+                    acc[record.date] = [];
+                }
+                acc[record.date].push(record);
+                return acc;
+            }, {});
+            
+            // Urutkan tanggal dari yang terbaru
+            const sortedDates = Object.keys(groupedByDate).sort((a, b) => new Date(b) - new Date(a));
+            
+            sortedDates.forEach(date => {
+                const dateHeader = document.createElement('div');
+                dateHeader.className = 'date-header';
+                dateHeader.style.marginTop = '1rem';
+                dateHeader.style.marginBottom = '0.5rem';
+                dateHeader.style.fontWeight = 'bold';
+                dateHeader.textContent = new Date(date).toLocaleDateString('id-ID', { 
+                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+                });
+                listContainer.appendChild(dateHeader);
+                
+                groupedByDate[date].forEach(record => {
+                    const badgeClass = record.status === 'present' ? 'badge-present' : 
+                                     record.status === 'late' ? 'badge-late' : 'badge-absent';
+                    const badgeText = record.status === 'present' ? 'Hadir' : 
+                                    record.status === 'late' ? 'Terlambat' : 'Tidak Hadir';
+                    
+                    const item = document.createElement('div');
+                    item.className = 'attendance-item';
+                    item.innerHTML = `
+                        <div class="student-name">${record.studentName}</div>
+                        <div class="attendance-badge ${badgeClass}">${badgeText}</div>
+                        <div class="attendance-time">${record.time || '-'}</div>
+                    `;
+                    
+                    if (record.status === 'late' && record.lateReason) {
+                        item.innerHTML += `<div class="late-reason" style="flex:100%;font-size:0.8rem;margin-top:5px;">Alasan: ${record.lateReason}</div>`;
+                    }
+                    
+                    listContainer.appendChild(item);
+                });
+            });
+        }
+        
+        // Fungsi untuk menampilkan statistik absensi
+        function showAttendanceStats() {
+            const selectedMonth = document.getElementById('stats-month').value;
+            const listContainer = document.getElementById('student-stats-list');
+            
+            // Filter data berdasarkan bulan yang dipilih
+            const filteredData = attendanceData.filter(record => {
+                const recordMonth = new Date(record.date).getMonth() + 1;
+                return recordMonth.toString() === selectedMonth;
+            });
+            
+            // Hitung statistik keseluruhan
+            const totalDays = new Date(2023, selectedMonth, 0).getDate(); // Jumlah hari dalam bulan
+            const presentCount = filteredData.filter(a => a.status === 'present').length;
+            const lateCount = filteredData.filter(a => a.status === 'late').length;
+            const absentCount = filteredData.filter(a => a.status === 'absent').length;
+            
+            // Hitung persentase kehadiran
+            const totalStudents = 4;
+            const totalPossibleAttendances = totalDays * totalStudents;
+            const actualAttendances = presentCount + lateCount;
+            const attendancePercentage = totalPossibleAttendances > 0 ? 
+                Math.round((actualAttendances / totalPossibleAttendances) * 100) : 0;
+            
+            // Update statistik keseluruhan
+            document.getElementById('avg-attendance').textContent = `${attendancePercentage}%`;
+            document.getElementById('total-late').textContent = lateCount;
+            document.getElementById('total-absent').textContent = absentCount;
+            
+            // Hitung statistik per siswa
+            const students = [
+                { id: 1, name: "Pratama Wijaya (Tama)" },
+                { id: 2, name: "Iqbal Mahdani" },
+                { id: 3, name: "Ferzio" },
+                { id: 4, name: "Aldo Bastian" }
+            ];
+            
+            listContainer.innerHTML = '';
+            
+            students.forEach(student => {
+                const studentRecords = filteredData.filter(record => record.studentId === student.id);
+                const present = studentRecords.filter(r => r.status === 'present').length;
+                const late = studentRecords.filter(r => r.status === 'late').length;
+                const absent = studentRecords.filter(r => r.status === 'absent').length;
+                const total = present + late + absent;
+                const percentage = totalDays > 0 ? Math.round(((present + late) / totalDays) * 100) : 0;
+                
+                const item = document.createElement('div');
+                item.className = 'attendance-item';
+                item.innerHTML = `
+                    <div class="student-name">${student.name}</div>
+                    <div style="flex:1;text-align:center;">${percentage}%</div>
+                    <div style="flex:1;text-align:center;">${present}</div>
+                    <div style="flex:1;text-align:center;">${late}</div>
+                    <div style="flex:1;text-align:center;">${absent}</div>
+                `;
+                listContainer.appendChild(item);
+            });
+            
+            // Tambahkan header
+            const header = document.createElement('div');
+            header.className = 'attendance-item';
+            header.style.fontWeight = 'bold';
+            header.style.backgroundColor = 'rgba(52, 152, 219, 0.1)';
+            header.innerHTML = `
+                <div class="student-name">Nama Siswa</div>
+                <div style="flex:1;text-align:center;">Kehadiran</div>
+                <div style="flex:1;text-align:center;">Hadir</div>
+                <div style="flex:1;text-align:center;">Terlambat</div>
+                <div style="flex:1;text-align:center;">Absen</div>
+            `;
+            listContainer.insertBefore(header, listContainer.firstChild);
+        }
+        
+        // Fungsi untuk menambahkan absensi baru
+        document.getElementById('submit-attendance').addEventListener('click', function() {
+            const studentSelect = document.getElementById('student-select');
+            const statusSelect = document.getElementById('attendance-status');
+            const lateReasonInput = document.getElementById('late-reason');
+            
+            if (!studentSelect.value) {
+                alert('Silakan pilih siswa terlebih dahulu');
+                return;
+            }
+            
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            const dateString = now.toISOString().split('T')[0];
+            
+            const studentId = parseInt(studentSelect.value);
+            const studentName = studentSelect.options[studentSelect.selectedIndex].text;
+            const status = statusSelect.value;
+            const lateReason = status === 'late' ? lateReasonInput.value : '';
+            
+            // Cek apakah siswa sudah ada di absensi hari ini
+            const today = dateString;
+            const existingIndex = attendanceData.findIndex(record => 
+                record.studentId === studentId && record.date === today);
+            
+            if (existingIndex >= 0) {
+                // Update record yang sudah ada
+                attendanceData[existingIndex] = {
+                    id: attendanceData[existingIndex].id,
+                    studentId,
+                    studentName,
+                    date: today,
+                    time: timeString,
+                    status,
+                    lateReason
+                };
+            } else {
+                // Tambahkan record baru
+                const newId = attendanceData.length > 0 ? 
+                    Math.max(...attendanceData.map(r => r.id)) + 1 : 1;
+                
+                attendanceData.push({
+                    id: newId,
+                    studentId,
+                    studentName,
+                    date: today,
+                    time: timeString,
+                    status,
+                    lateReason
+                });
+            }
+            
+            // Reset form
+            studentSelect.value = '';
+            statusSelect.value = 'present';
+            lateReasonInput.value = '';
+            document.getElementById('late-reason-container').style.display = 'none';
+            
+            // Update tampilan
+            showTodayAttendance();
+            alert('Absensi berhasil disimpan!');
+        });
+        
+        // Event listener untuk filter riwayat
+        document.getElementById('filter-month').addEventListener('change', showAttendanceHistory);
+        document.getElementById('search-history').addEventListener('input', showAttendanceHistory);
+        
+        // Event listener untuk statistik
+        document.getElementById('stats-month').addEventListener('change', showAttendanceStats);
+        
+        // Panggil fungsi untuk menampilkan data saat pertama kali load
+        document.addEventListener('DOMContentLoaded', function() {
+            showTodayAttendance();
+            showAttendanceHistory();
+            showAttendanceStats();
+            
+            // Tambahkan event listener untuk tab absensi
+            document.querySelectorAll('[data-tab^="absensi"]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (this.getAttribute('data-tab') === 'riwayat-absensi') {
+                        showAttendanceHistory();
+                    } else if (this.getAttribute('data-tab') === 'statistik-absensi') {
+                        showAttendanceStats();
+                    } else {
+                        showTodayAttendance();
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
