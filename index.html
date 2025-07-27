@@ -850,60 +850,6 @@
             border-top-color: var(--accent);
         }
         
-        .attendance-form {
-            background: var(--light);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        
-        body.dark-mode .attendance-form {
-            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
-        }
-        
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .form-group select, 
-        .form-group input {
-            width: 100%;
-            padding: 10px 15px;
-            border-radius: 5px;
-            border: 1px solid rgba(0,0,0,0.1);
-            background: var(--light);
-            color: var(--dark);
-        }
-        
-        body.dark-mode .form-group select,
-        body.dark-mode .form-group input {
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .submit-btn {
-            background: var(--gradient);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 500;
-            width: 100%;
-            transition: all 0.3s;
-        }
-        
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        
         .attendance-list {
             margin-top: 1.5rem;
         }
@@ -978,46 +924,6 @@
             color: var(--dark);
             opacity: 0.7;
             font-style: italic;
-        }
-        
-        /* Admin Controls */
-        .admin-controls {
-            background: rgba(52, 152, 219, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            border-left: 4px solid var(--primary);
-        }
-        
-        .admin-only {
-            display: none;
-        }
-        
-        .is-admin .admin-only {
-            display: block;
-        }
-        
-        .admin-toggle {
-            position: fixed;
-            bottom: 150px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--accent);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
-            cursor: pointer;
-            z-index: 100;
-            transition: all 0.3s;
-        }
-        
-        .admin-toggle:hover {
-            transform: scale(1.1);
         }
         
         @media (max-width: 768px) {
@@ -1109,7 +1015,7 @@
                 <div class="feature-card" id="absensiBtn">
                     <i class="fas fa-clipboard-check"></i>
                     <h3>Absensi Digital</h3>
-                    <p>Catat kehadiran siswa secara digital dan real-time</p>
+                    <p>Lihat catatan kehadiran siswa kelas kami</p>
                 </div>
             </div>
             
@@ -1154,7 +1060,7 @@
                 
                 <div class="feature-card">
                     <i class="fas fa-chalkboard-teacher"></i>
-                    <h3>12 Guru</h3>
+                    <h3>25 Guru</h3>
                     <p>Pengajar yang mendidik kelas kami</p>
                 </div>
                 
@@ -1257,39 +1163,6 @@
                             <div class="detail-info"></div>
                         </li>
                     </ul>
-                </div>
-                
-                <div class="admin-only">
-                    <div class="admin-controls">
-                        <h4 style="margin-bottom: 1rem;">Admin Panel - Update Jadwal</h4>
-                        <div class="form-group">
-                            <label for="tournament-title">Nama Turnamen</label>
-                            <input type="text" id="tournament-title" placeholder="Contoh: Turnamen Mobile Legends">
-                        </div>
-                        <div class="form-group">
-                            <label for="tournament-date">Tanggal</label>
-                            <input type="date" id="tournament-date">
-                        </div>
-                        <div class="form-group">
-                            <label for="tournament-time">Waktu</label>
-                            <input type="text" id="tournament-time" placeholder="Contoh: 13.00-17.00">
-                        </div>
-                        <div class="form-group">
-                            <label for="tournament-status">Status</label>
-                            <select id="tournament-status">
-                                <option value="upcoming">Akan Datang</option>
-                                <option value="ongoing">Berlangsung</option>
-                                <option value="completed">Selesai</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="tournament-details">Detail</label>
-                            <textarea id="tournament-details" rows="3" placeholder="Deskripsi turnamen, peserta, dll."></textarea>
-                        </div>
-                        <button class="submit-btn" id="add-tournament">
-                            <i class="fas fa-plus"></i> Tambah Jadwal
-                        </button>
-                    </div>
                 </div>
                 
                 <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
@@ -1443,7 +1316,7 @@
         </div>
     </div>
 
-    <!-- Modal Absensi Digital - Modified Version -->
+    <!-- Modal Absensi Digital - Versi User -->
     <div class="modal" id="absensiModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1481,40 +1354,6 @@
                         <h4>Daftar Kehadiran Hari Ini</h4>
                         <div id="today-attendance-list">
                             <p class="empty-message">Ketua kelas akan mengupdate absensi harian</p>
-                        </div>
-                    </div>
-                    
-                    <div class="admin-only">
-                        <div class="admin-controls">
-                            <h4 style="margin-bottom: 1rem;">Admin Panel - Update Absensi</h4>
-                            <div class="form-group">
-                                <label for="student-select">Nama Siswa</label>
-                                <select id="student-select">
-                                    <option value="">Pilih Siswa</option>
-                                    <option value="1">Pratama Wijaya (Tama)</option>
-                                    <option value="2">Iqbal Mahdani</option>
-                                    <option value="3">Ferzio</option>
-                                    <option value="4">Aldo Bastian</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="attendance-status">Status Kehadiran</label>
-                                <select id="attendance-status">
-                                    <option value="present">Hadir</option>
-                                    <option value="late">Terlambat</option>
-                                    <option value="absent">Tidak Hadir</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group" id="late-reason-container" style="display: none;">
-                                <label for="late-reason">Alasan Terlambat</label>
-                                <input type="text" id="late-reason" placeholder="Masukkan alasan terlambat">
-                            </div>
-                            
-                            <button class="submit-btn" id="submit-attendance">
-                                <i class="fas fa-save"></i> Simpan Absensi
-                            </button>
                         </div>
                     </div>
                     
@@ -1571,15 +1410,11 @@
         <i class="fas fa-moon"></i>
     </div>
     
-    <div class="admin-toggle" id="adminToggleBtn">
-        <i class="fas fa-user-shield"></i>
-    </div>
-    
     <footer>
         <div class="wave"></div>
         <div class="container">
             <h3>Kelas X-TKJ SMK Swasta Melati Perbaungan</h3>
-            <p>Tahun Ajaran 2023/2024</p>
+            <p>Tahun Ajaran 2025/2026</p>
             
             <div class="footer-links">
                 <a href="#">Tentang Kami</a>
@@ -1596,7 +1431,7 @@
                 <a href="#"><i class="fab fa-tiktok"></i></a>
             </div>
             
-            <p>&copy; 2023 X-TKJ. All rights reserved.</p>
+            <p>&copy; 2025 BY PRATAMA WIJAYA & FRIEND IN X-TKJ. All rights reserved.</p>
         </div>
     </footer>
     
@@ -1679,9 +1514,6 @@
             // Tombol contact
             document.getElementById('contactBtn').addEventListener('click', openContactForm);
             
-            // Tombol admin toggle
-            document.getElementById('adminToggleBtn').addEventListener('click', toggleAdminMode);
-            
             // Scroll down button
             document.querySelector('.scroll-down').addEventListener('click', scrollToContent);
             
@@ -1702,9 +1534,7 @@
                     document.getElementById(tabId).classList.add('active');
                     
                     // Update content based on tab
-                    if (this.closest('#jadwalModal')) {
-                        showTournamentSchedule();
-                    } else if (this.closest('#absensiModal')) {
+                    if (this.closest('#absensiModal')) {
                         if (tabId === 'riwayat-absensi') {
                             showAttendanceHistory();
                         } else {
@@ -1743,26 +1573,9 @@
             // Initialize date and time
             updateDateTime();
             
-            // Initialize attendance and tournament data
+            // Initialize attendance data
             showTodayAttendance();
             showAttendanceHistory();
-            showTournamentSchedule();
-            
-            // Setup attendance form toggle
-            document.getElementById('attendance-status').addEventListener('change', function() {
-                const lateReasonContainer = document.getElementById('late-reason-container');
-                if (this.value === 'late') {
-                    lateReasonContainer.style.display = 'block';
-                } else {
-                    lateReasonContainer.style.display = 'none';
-                }
-            });
-            
-            // Setup attendance submission
-            document.getElementById('submit-attendance')?.addEventListener('click', submitAttendance);
-            
-            // Setup tournament submission
-            document.getElementById('add-tournament')?.addEventListener('click', addTournament);
             
             // Setup request buttons
             document.getElementById('request-update-btn')?.addEventListener('click', function() {
@@ -1805,19 +1618,6 @@
             }
         }
         
-        // Admin mode toggle
-        function toggleAdminMode() {
-            document.body.classList.toggle('is-admin');
-            const icon = document.querySelector('.admin-toggle i');
-            if (document.body.classList.contains('is-admin')) {
-                icon.style.color = '#2ecc71';
-                alert('Mode Admin Aktif - Anda sekarang dapat mengupdate data');
-            } else {
-                icon.style.color = 'white';
-                alert('Mode Admin Nonaktif');
-            }
-        }
-        
         // Open contact form
         function openContactForm() {
             alert('Fitur kontak akan segera tersedia!');
@@ -1856,8 +1656,6 @@
                 animateOnScroll();
             }, 500);
         });
-        
-        window.addEventListener('scroll', animateOnScroll);
 
         /* ==================== */
         /* FITUR ABSENSI DIGITAL */
@@ -1921,26 +1719,6 @@
                 time: "",
                 status: "absent",
                 lateReason: ""
-            }
-        ];
-        
-        // Data turnamen contoh
-        let tournamentData = [
-            {
-                id: 1,
-                title: "Turnamen Mobile Legends",
-                date: "2023-10-15",
-                time: "13.00-17.00",
-                status: "upcoming",
-                details: "Tim kelas X-TKJ vs XI-TKJ<br>Lokasi: Lab Komputer 1<br>Catatan: Bawa perangkat sendiri"
-            },
-            {
-                id: 2,
-                title: "Sparing Valorant",
-                date: "2023-09-05",
-                time: "14.00-16.00",
-                status: "completed",
-                details: "Hasil: X-TKJ Menang 2-1<br>Pemain Terbaik: Pratama Wijaya (Tama)<br>Catatan: Pertandingan seru dengan overtime"
             }
         ];
         
@@ -2061,156 +1839,6 @@
                     listContainer.appendChild(item);
                 });
             });
-        }
-        
-        // Fungsi untuk submit absensi
-        function submitAttendance() {
-            const studentSelect = document.getElementById('student-select');
-            const statusSelect = document.getElementById('attendance-status');
-            const lateReasonInput = document.getElementById('late-reason');
-            
-            if (!studentSelect.value) {
-                alert('Silakan pilih siswa terlebih dahulu');
-                return;
-            }
-            
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
-            const dateString = now.toISOString().split('T')[0];
-            
-            const studentId = parseInt(studentSelect.value);
-            const studentName = studentSelect.options[studentSelect.selectedIndex].text;
-            const status = statusSelect.value;
-            const lateReason = status === 'late' ? lateReasonInput.value : '';
-            
-            // Cek apakah siswa sudah ada di absensi hari ini
-            const today = dateString;
-            const existingIndex = attendanceData.findIndex(record => 
-                record.studentId === studentId && record.date === today);
-            
-            if (existingIndex >= 0) {
-                // Update record yang sudah ada
-                attendanceData[existingIndex] = {
-                    id: attendanceData[existingIndex].id,
-                    studentId,
-                    studentName,
-                    date: today,
-                    time: timeString,
-                    status,
-                    lateReason
-                };
-            } else {
-                // Tambahkan record baru
-                const newId = attendanceData.length > 0 ? 
-                    Math.max(...attendanceData.map(r => r.id)) + 1 : 1;
-                
-                attendanceData.push({
-                    id: newId,
-                    studentId,
-                    studentName,
-                    date: today,
-                    time: timeString,
-                    status,
-                    lateReason
-                });
-            }
-            
-            // Reset form
-            studentSelect.value = '';
-            statusSelect.value = 'present';
-            lateReasonInput.value = '';
-            document.getElementById('late-reason-container').style.display = 'none';
-            
-            // Update tampilan
-            showTodayAttendance();
-            alert('Absensi berhasil disimpan!');
-        }
-        
-        /* ==================== */
-        /* FITUR TURNAMEN DIGITAL */
-        /* ==================== */
-        
-        // Fungsi untuk menampilkan jadwal turnamen
-        function showTournamentSchedule() {
-            const tab = document.querySelector('#jadwalModal .tab-btn.active').getAttribute('data-tab');
-            const listContainer = document.getElementById(tab);
-            
-            const filteredTournaments = tournamentData.filter(t => t.status === tab);
-            
-            if (filteredTournaments.length === 0) {
-                if (tab === 'upcoming') {
-                    listContainer.innerHTML = '<p class="empty-message">Ketua kelas akan mengupdate jadwal turnamen</p>';
-                } else if (tab === 'ongoing') {
-                    listContainer.innerHTML = '<p class="empty-message">Tidak ada turnamen yang sedang berlangsung</p>';
-                } else {
-                    listContainer.innerHTML = '<p class="empty-message">Belum ada turnamen yang selesai</p>';
-                }
-                return;
-            }
-            
-            const ul = listContainer.querySelector('ul.option-list') || document.createElement('ul');
-            ul.className = 'option-list';
-            ul.innerHTML = '';
-            
-            filteredTournaments.forEach(tournament => {
-                const li = document.createElement('li');
-                li.setAttribute('data-detail', `${tournament.title}|Tanggal: ${tournament.date}<br>Waktu: ${tournament.time}<br>${tournament.details}`);
-                li.innerHTML = `
-                    ${tournament.title}
-                    <span class="time-badge">${new Date(tournament.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
-                    <div class="detail-info"></div>
-                `;
-                ul.appendChild(li);
-            });
-            
-            if (!listContainer.querySelector('ul.option-list')) {
-                listContainer.appendChild(ul);
-            }
-            
-            // Tambahkan event listener untuk detail info
-            document.querySelectorAll('#jadwalModal .option-list li').forEach(item => {
-                item.addEventListener('click', function() {
-                    const detailData = this.getAttribute('data-detail').split('|');
-                    showDetail(this, detailData[0], detailData[1]);
-                });
-            });
-        }
-        
-        // Fungsi untuk menambahkan turnamen baru
-        function addTournament() {
-            const title = document.getElementById('tournament-title').value;
-            const date = document.getElementById('tournament-date').value;
-            const time = document.getElementById('tournament-time').value;
-            const status = document.getElementById('tournament-status').value;
-            const details = document.getElementById('tournament-details').value;
-            
-            if (!title || !date || !time) {
-                alert('Harap isi semua field yang diperlukan');
-                return;
-            }
-            
-            const newId = tournamentData.length > 0 ? 
-                Math.max(...tournamentData.map(t => t.id)) + 1 : 1;
-            
-            tournamentData.push({
-                id: newId,
-                title,
-                date,
-                time,
-                status,
-                details
-            });
-            
-            // Reset form
-            document.getElementById('tournament-title').value = '';
-            document.getElementById('tournament-date').value = '';
-            document.getElementById('tournament-time').value = '';
-            document.getElementById('tournament-status').value = 'upcoming';
-            document.getElementById('tournament-details').value = '';
-            
-            // Update tampilan
-            showTournamentSchedule();
-            alert('Jadwal turnamen berhasil ditambahkan!');
         }
     </script>
 </body>
