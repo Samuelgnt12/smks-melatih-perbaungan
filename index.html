@@ -980,6 +980,46 @@
             font-style: italic;
         }
         
+        /* Admin Controls */
+        .admin-controls {
+            background: rgba(52, 152, 219, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .admin-only {
+            display: none;
+        }
+        
+        .is-admin .admin-only {
+            display: block;
+        }
+        
+        .admin-toggle {
+            position: fixed;
+            bottom: 150px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .admin-toggle:hover {
+            transform: scale(1.1);
+        }
+        
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -1055,9 +1095,9 @@
                 </div>
                 
                 <div class="feature-card" id="jadwalBtn">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3>Jadwal Pelajaran</h3>
-                    <p>Jadwal lengkap pelajaran harian dan kegiatan kelas kami</p>
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Turnamen Digital</h3>
+                    <p>Jadwal lengkap turnamen dan sparing game kelas kami</p>
                 </div>
                 
                 <div class="feature-card" id="prestasiBtn">
@@ -1180,127 +1220,85 @@
     <div class="modal" id="jadwalModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Jadwal Pelajaran</h3>
+                <h3>Jadwal Turnamen Digital</h3>
                 <button class="close-modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="tabs">
-                    <button class="tab-btn active" data-tab="senin">Senin</button>
-                    <button class="tab-btn" data-tab="selasa">Selasa</button>
-                    <button class="tab-btn" data-tab="rabu">Rabu</button>
-                    <button class="tab-btn" data-tab="kamis">Kamis</button>
-                    <button class="tab-btn" data-tab="jumat">Jumat</button>
-                    <button class="tab-btn" data-tab="sabtu">Sabtu</button>
+                    <button class="tab-btn active" data-tab="upcoming">Akan Datang</button>
+                    <button class="tab-btn" data-tab="ongoing">Berlangsung</button>
+                    <button class="tab-btn" data-tab="completed">Selesai</button>
                 </div>
                 
-                <div class="tab-content active" id="senin">
+                <div class="tab-content active" id="upcoming">
                     <ul class="option-list">
-                        <li data-detail="Matematika|Waktu: 07.30-09.00<br>Guru: Pak Budi<br>Ruangan: A12<br>Catatan: Bawa kalkulator">
-                            Matematika
-                            <span class="time-badge">07.30-09.00</span>
+                        <li data-detail="Turnamen Mobile Legends|Tanggal: 15 Oktober 2023<br>Waktu: 13.00-17.00<br>Lokasi: Lab Komputer 1<br>Peserta: Tim kelas X-TKJ vs XI-TKJ<br>Catatan: Bawa perangkat sendiri">
+                            Turnamen Mobile Legends
+                            <span class="time-badge">15 Okt 2023</span>
                             <div class="detail-info"></div>
                         </li>
-                        <li data-detail="Bahasa Indonesia|Waktu: 09.15-10.45<br>Guru: Bu Ani<br>Ruangan: A12<br>Catatan: Presentasi kelompok">
-                            Bahasa Indonesia
-                            <span class="time-badge">09.15-10.45</span>
-                            <div class="detail-info"></div>
-                        </li>
-                        <li data-detail="TKJ Dasar|Waktu: 11.00-12.30<br>Guru: Pak Joko<br>Ruangan: Lab Komputer 1<br>Catatan: Praktikum jaringan">
-                            TKJ Dasar
-                            <span class="time-badge">11.00-12.30</span>
+                    </ul>
+                    <p class="empty-message" style="text-align: center;">
+                        Ketua kelas akan mengupdate jadwal turnamen
+                    </p>
+                </div>
+                
+                <div class="tab-content" id="ongoing">
+                    <p class="empty-message" style="text-align: center;">
+                        Tidak ada turnamen yang sedang berlangsung
+                    </p>
+                </div>
+                
+                <div class="tab-content" id="completed">
+                    <ul class="option-list">
+                        <li data-detail="Sparing Valorant|Tanggal: 5 September 2023<br>Hasil: X-TKJ Menang 2-1<br>Pemain Terbaik: Pratama Wijaya (Tama)<br>Catatan: Pertandingan seru dengan overtime">
+                            Sparing Valorant
+                            <span class="time-badge">5 Sep 2023</span>
                             <div class="detail-info"></div>
                         </li>
                     </ul>
                 </div>
                 
-                <div class="tab-content" id="selasa">
-                    <ul class="option-list">
-                        <li data-detail="Bahasa Inggris|Waktu: 07.30-09.00<br>Guru: Bu Diana<br>Ruangan: A12<br>Catatan: Tes listening">
-                            Bahasa Inggris
-                            <span class="time-badge">07.30-09.00</span>
-                            <div class="detail-info"></div>
-                        </li>
-                        <li data-detail="PPKN|Waktu: 09.15-10.45<br>Guru: Pak Heru<br>Ruangan: A12<br>Catatan: Diskusi kelompok">
-                            PPKN
-                            <span class="time-badge">09.15-10.45</span>
-                            <div class="detail-info"></div>
-                        </li>
-                        <li data-detail="Fisika|Waktu: 11.00-12.30<br>Guru: Bu Rina<br>Ruangan: Lab Fisika<br>Catatan: Praktikum listrik">
-                            Fisika
-                            <span class="time-badge">11.00-12.30</span>
-                            <div class="detail-info"></div>
-                        </li>
-                    </ul>
+                <div class="admin-only">
+                    <div class="admin-controls">
+                        <h4 style="margin-bottom: 1rem;">Admin Panel - Update Jadwal</h4>
+                        <div class="form-group">
+                            <label for="tournament-title">Nama Turnamen</label>
+                            <input type="text" id="tournament-title" placeholder="Contoh: Turnamen Mobile Legends">
+                        </div>
+                        <div class="form-group">
+                            <label for="tournament-date">Tanggal</label>
+                            <input type="date" id="tournament-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="tournament-time">Waktu</label>
+                            <input type="text" id="tournament-time" placeholder="Contoh: 13.00-17.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="tournament-status">Status</label>
+                            <select id="tournament-status">
+                                <option value="upcoming">Akan Datang</option>
+                                <option value="ongoing">Berlangsung</option>
+                                <option value="completed">Selesai</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tournament-details">Detail</label>
+                            <textarea id="tournament-details" rows="3" placeholder="Deskripsi turnamen, peserta, dll."></textarea>
+                        </div>
+                        <button class="submit-btn" id="add-tournament">
+                            <i class="fas fa-plus"></i> Tambah Jadwal
+                        </button>
+                    </div>
                 </div>
                 
-                <div class="tab-content" id="rabu">
-                    <ul class="option-list">
-                        <li data-detail="Kimia|Waktu: 07.30-09.00<br>Guru: Bu Siti<br>Ruangan: A12<br>Catatan: Bawa alat praktikum">
-                            Kimia
-                            <span class="time-badge">07.30-09.00</span>
-                            <div class="detail-info"></div>
-                        </li>
-                        <li data-detail="Olahraga|Waktu: 09.15-10.45<br>Guru: Pak Andi<br>Ruangan: Lapangan<br>Catatan: Bawa baju olahraga">
-                            Olahraga
-                            <span class="time-badge">09.15-10.45</span>
-                            <div class="detail-info"></div>
-                        </li>
-                        <li data-detail="Seni Budaya|Waktu: 11.00-12.30<br>Guru: Bu Lina<br>Ruangan: Aula<br>Catatan: Persiapan pentas seni">
-                            Seni Budaya
-                            <span class="time-badge">11.00-12.30</span>
-                            <div class="detail-info"></div>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="tab-content" id="kamis">
-                    <ul class="option-list">
-                        <li data-detail="TKJ Lanjutan|Waktu: 07.30-09.00<br>Guru: Pak Joko<br>Ruangan: Lab Komputer 1<br>Catatan: Praktikum jaringan">
-                            TKJ Lanjutan
-                            <span class="time-badge">07.30-09.00</span>
-                            <div class="detail-info"></div>
-                        </li>
-                        <li data-detail="Matematika|Waktu: 09.15-10.45<br>Guru: Pak Budi<br>Ruangan: A12<br>Catatan: Ujian tengah semester">
-                            Matematika
-                            <span class="time-badge">09.15-10.45</span>
-                            <div class="detail-info"></div>
-                        </li>
-                        <li data-detail="Bahasa Inggris|Waktu: 11.00-12.30<br>Guru: Bu Diana<br>Ruangan: A12<br>Catatan: Presentasi proyek">
-                            Bahasa Inggris
-                            <span class="time-badge">11.00-12.30</span>
-                            <div class="detail-info"></div>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="tab-content" id="jumat">
-                    <ul class="option-list">
-                        <li data-detail="Agama|Waktu: 07.30-09.00<br>Guru: Pak Ahmad<br>Ruangan: A12<br>Catatan: Diskusi kelompok">
-                            Agama
-                            <span class="time-badge">07.30-09.00</span>
-                            <div class="detail-info"></div>
-                        </li>
-                        <li data-detail="BK|Waktu: 09.15-10.45<br>Guru: Bu Rita<br>Ruangan: A12<br>Catatan: Persiapan karier">
-                            BK
-                            <span class="time-badge">09.15-10.45</span>
-                            <div class="detail-info"></div>
-                        </li>
-                        <li data-detail="Praktikum TKJ|Waktu: 11.00-12.30<br>Guru: Pak Joko<br>Ruangan: Lab Komputer 1<br>Catatan: Bawa laptop">
-                            Praktikum TKJ
-                            <span class="time-badge">11.00-12.30</span>
-                            <div class="detail-info"></div>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="tab-content" id="sabtu">
-                    <ul class="option-list">
-                        <li data-detail="Ekstrakurikuler|Waktu: 08.00-11.00<br>Pilihan:<br>• Web Design<br>• Robotik<br>• English Club<br>• Olahraga">
-                            Ekstrakurikuler
-                            <span class="time-badge">08.00-11.00</span>
-                            <div class="detail-info"></div>
-                        </li>
-                    </ul>
+                <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                    <p style="text-align: center; margin-bottom: 1rem;">
+                        <i class="fas fa-info-circle"></i> Jadwal akan diupdate oleh ketua kelas
+                    </p>
+                    <button class="submit-btn" id="request-schedule-btn" style="background: #6c757d;">
+                        <i class="fas fa-envelope"></i> Request Update Jadwal
+                    </button>
                 </div>
             </div>
         </div>
@@ -1445,7 +1443,7 @@
         </div>
     </div>
 
-    <!-- Modal Absensi Digital -->
+    <!-- Modal Absensi Digital - Modified Version -->
     <div class="modal" id="absensiModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1456,7 +1454,6 @@
                 <div class="tabs">
                     <button class="tab-btn active" data-tab="absensi-hari-ini">Hari Ini</button>
                     <button class="tab-btn" data-tab="riwayat-absensi">Riwayat</button>
-                    <button class="tab-btn" data-tab="statistik-absensi">Statistik</button>
                 </div>
                 
                 <div class="tab-content active" id="absensi-hari-ini">
@@ -1480,41 +1477,54 @@
                         </div>
                     </div>
                     
-                    <div class="attendance-form">
-                        <div class="form-group">
-                            <label for="student-select">Nama Siswa</label>
-                            <select id="student-select">
-                                <option value="">Pilih Siswa</option>
-                                <option value="1">Pratama Wijaya (Tama)</option>
-                                <option value="2">Iqbal Mahdani</option>
-                                <option value="3">Ferzio</option>
-                                <option value="4">Aldo Bastian</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="attendance-status">Status Kehadiran</label>
-                            <select id="attendance-status">
-                                <option value="present">Hadir</option>
-                                <option value="late">Terlambat</option>
-                                <option value="absent">Tidak Hadir</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group" id="late-reason-container" style="display: none;">
-                            <label for="late-reason">Alasan Terlambat</label>
-                            <input type="text" id="late-reason" placeholder="Masukkan alasan terlambat">
-                        </div>
-                        
-                        <button class="submit-btn" id="submit-attendance">Simpan Absensi</button>
-                    </div>
-                    
                     <div class="attendance-list">
                         <h4>Daftar Kehadiran Hari Ini</h4>
                         <div id="today-attendance-list">
-                            <!-- Data absensi akan dimasukkan di sini oleh JavaScript -->
-                            <p class="empty-message">Belum ada data absensi hari ini</p>
+                            <p class="empty-message">Ketua kelas akan mengupdate absensi harian</p>
                         </div>
+                    </div>
+                    
+                    <div class="admin-only">
+                        <div class="admin-controls">
+                            <h4 style="margin-bottom: 1rem;">Admin Panel - Update Absensi</h4>
+                            <div class="form-group">
+                                <label for="student-select">Nama Siswa</label>
+                                <select id="student-select">
+                                    <option value="">Pilih Siswa</option>
+                                    <option value="1">Pratama Wijaya (Tama)</option>
+                                    <option value="2">Iqbal Mahdani</option>
+                                    <option value="3">Ferzio</option>
+                                    <option value="4">Aldo Bastian</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="attendance-status">Status Kehadiran</label>
+                                <select id="attendance-status">
+                                    <option value="present">Hadir</option>
+                                    <option value="late">Terlambat</option>
+                                    <option value="absent">Tidak Hadir</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group" id="late-reason-container" style="display: none;">
+                                <label for="late-reason">Alasan Terlambat</label>
+                                <input type="text" id="late-reason" placeholder="Masukkan alasan terlambat">
+                            </div>
+                            
+                            <button class="submit-btn" id="submit-attendance">
+                                <i class="fas fa-save"></i> Simpan Absensi
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+                        <p style="text-align: center; margin-bottom: 1rem;">
+                            <i class="fas fa-info-circle"></i> Hanya ketua kelas yang dapat mengupdate absensi
+                        </p>
+                        <button class="submit-btn" id="request-update-btn" style="background: #6c757d;">
+                            <i class="fas fa-envelope"></i> Request Update ke Ketua Kelas
+                        </button>
                     </div>
                 </div>
                 
@@ -1545,51 +1555,7 @@
                     
                     <div class="attendance-list">
                         <div id="attendance-history-list">
-                            <!-- Data riwayat absensi akan dimasukkan di sini oleh JavaScript -->
-                            <p class="empty-message">Belum ada data riwayat absensi</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tab-content" id="statistik-absensi">
-                    <div class="form-group">
-                        <label for="stats-month">Pilih Bulan</label>
-                        <select id="stats-month">
-                            <option value="1">Januari</option>
-                            <option value="2">Februari</option>
-                            <option value="3">Maret</option>
-                            <option value="4">April</option>
-                            <option value="5">Mei</option>
-                            <option value="6">Juni</option>
-                            <option value="7">Juli</option>
-                            <option value="8">Agustus</option>
-                            <option value="9">September</option>
-                            <option value="10">Oktober</option>
-                            <option value="11">November</option>
-                            <option value="12">Desember</option>
-                        </select>
-                    </div>
-                    
-                    <div class="attendance-status">
-                        <div class="status-card">
-                            <h4>Rata-rata Kehadiran</h4>
-                            <p id="avg-attendance">0%</p>
-                        </div>
-                        <div class="status-card late">
-                            <h4>Total Terlambat</h4>
-                            <p id="total-late">0</p>
-                        </div>
-                        <div class="status-card absent">
-                            <h4>Total Tidak Hadir</h4>
-                            <p id="total-absent">0</p>
-                        </div>
-                    </div>
-                    
-                    <div class="attendance-list">
-                        <h4>Statistik per Siswa</h4>
-                        <div id="student-stats-list">
-                            <!-- Data statistik akan dimasukkan di sini oleh JavaScript -->
-                            <p class="empty-message">Pilih bulan untuk melihat statistik</p>
+                            <p class="empty-message">Data absensi akan diupdate oleh ketua kelas</p>
                         </div>
                     </div>
                 </div>
@@ -1603,6 +1569,10 @@
     
     <div class="dark-mode-toggle" id="darkModeBtn">
         <i class="fas fa-moon"></i>
+    </div>
+    
+    <div class="admin-toggle" id="adminToggleBtn">
+        <i class="fas fa-user-shield"></i>
     </div>
     
     <footer>
@@ -1709,6 +1679,9 @@
             // Tombol contact
             document.getElementById('contactBtn').addEventListener('click', openContactForm);
             
+            // Tombol admin toggle
+            document.getElementById('adminToggleBtn').addEventListener('click', toggleAdminMode);
+            
             // Scroll down button
             document.querySelector('.scroll-down').addEventListener('click', scrollToContent);
             
@@ -1727,6 +1700,17 @@
                     this.classList.add('active');
                     const tabId = this.getAttribute('data-tab');
                     document.getElementById(tabId).classList.add('active');
+                    
+                    // Update content based on tab
+                    if (this.closest('#jadwalModal')) {
+                        showTournamentSchedule();
+                    } else if (this.closest('#absensiModal')) {
+                        if (tabId === 'riwayat-absensi') {
+                            showAttendanceHistory();
+                        } else {
+                            showTodayAttendance();
+                        }
+                    }
                 });
             });
             
@@ -1755,6 +1739,43 @@
                     });
                 });
             }
+            
+            // Initialize date and time
+            updateDateTime();
+            
+            // Initialize attendance and tournament data
+            showTodayAttendance();
+            showAttendanceHistory();
+            showTournamentSchedule();
+            
+            // Setup attendance form toggle
+            document.getElementById('attendance-status').addEventListener('change', function() {
+                const lateReasonContainer = document.getElementById('late-reason-container');
+                if (this.value === 'late') {
+                    lateReasonContainer.style.display = 'block';
+                } else {
+                    lateReasonContainer.style.display = 'none';
+                }
+            });
+            
+            // Setup attendance submission
+            document.getElementById('submit-attendance')?.addEventListener('click', submitAttendance);
+            
+            // Setup tournament submission
+            document.getElementById('add-tournament')?.addEventListener('click', addTournament);
+            
+            // Setup request buttons
+            document.getElementById('request-update-btn')?.addEventListener('click', function() {
+                alert('Permintaan update absensi telah dikirim ke ketua kelas');
+            });
+            
+            document.getElementById('request-schedule-btn')?.addEventListener('click', function() {
+                alert('Permintaan update jadwal turnamen telah dikirim ke ketua kelas');
+            });
+            
+            // Setup search history
+            document.getElementById('search-history')?.addEventListener('input', showAttendanceHistory);
+            document.getElementById('filter-month')?.addEventListener('change', showAttendanceHistory);
         });
         
         // Close modal when clicking outside
@@ -1781,6 +1802,19 @@
             } else {
                 icon.classList.remove('fa-sun');
                 icon.classList.add('fa-moon');
+            }
+        }
+        
+        // Admin mode toggle
+        function toggleAdminMode() {
+            document.body.classList.toggle('is-admin');
+            const icon = document.querySelector('.admin-toggle i');
+            if (document.body.classList.contains('is-admin')) {
+                icon.style.color = '#2ecc71';
+                alert('Mode Admin Aktif - Anda sekarang dapat mengupdate data');
+            } else {
+                icon.style.color = 'white';
+                alert('Mode Admin Nonaktif');
             }
         }
         
@@ -1839,17 +1873,6 @@
         
         // Update waktu setiap detik
         setInterval(updateDateTime, 1000);
-        updateDateTime(); // Panggil sekali saat pertama kali load
-        
-        // Toggle alasan terlambat berdasarkan status kehadiran
-        document.getElementById('attendance-status').addEventListener('change', function() {
-            const lateReasonContainer = document.getElementById('late-reason-container');
-            if (this.value === 'late') {
-                lateReasonContainer.style.display = 'block';
-            } else {
-                lateReasonContainer.style.display = 'none';
-            }
-        });
         
         // Data absensi contoh (dalam aplikasi nyata, ini bisa dari database)
         let attendanceData = [
@@ -1871,18 +1894,9 @@
                 status: "late",
                 lateReason: "Macet di jalan"
             },
-            {
-                id: 3,
-                studentId: 3,
-                studentName: "Ferzio",
-                date: new Date().toISOString().split('T')[0],
-                time: "07:25",
-                status: "present",
-                lateReason: ""
-            },
             // Data contoh untuk bulan sebelumnya
             {
-                id: 4,
+                id: 3,
                 studentId: 1,
                 studentName: "Pratama Wijaya (Tama)",
                 date: "2023-09-15",
@@ -1891,7 +1905,7 @@
                 lateReason: ""
             },
             {
-                id: 5,
+                id: 4,
                 studentId: 2,
                 studentName: "Iqbal Mahdani",
                 date: "2023-09-15",
@@ -1900,13 +1914,33 @@
                 lateReason: "Bangun kesiangan"
             },
             {
-                id: 6,
+                id: 5,
                 studentId: 4,
                 studentName: "Aldo Bastian",
                 date: "2023-09-15",
                 time: "",
                 status: "absent",
                 lateReason: ""
+            }
+        ];
+        
+        // Data turnamen contoh
+        let tournamentData = [
+            {
+                id: 1,
+                title: "Turnamen Mobile Legends",
+                date: "2023-10-15",
+                time: "13.00-17.00",
+                status: "upcoming",
+                details: "Tim kelas X-TKJ vs XI-TKJ<br>Lokasi: Lab Komputer 1<br>Catatan: Bawa perangkat sendiri"
+            },
+            {
+                id: 2,
+                title: "Sparing Valorant",
+                date: "2023-09-05",
+                time: "14.00-16.00",
+                status: "completed",
+                details: "Hasil: X-TKJ Menang 2-1<br>Pemain Terbaik: Pratama Wijaya (Tama)<br>Catatan: Pertandingan seru dengan overtime"
             }
         ];
         
@@ -1925,7 +1959,7 @@
                 4 - todayAttendance.length; // Total siswa 4
             
             if (todayAttendance.length === 0) {
-                listContainer.innerHTML = '<p class="empty-message">Belum ada data absensi hari ini</p>';
+                listContainer.innerHTML = '<p class="empty-message">Ketua kelas akan mengupdate absensi harian</p>';
                 return;
             }
             
@@ -1977,7 +2011,7 @@
             }
             
             if (filteredData.length === 0) {
-                listContainer.innerHTML = '<p class="empty-message">Tidak ada data yang sesuai dengan filter</p>';
+                listContainer.innerHTML = '<p class="empty-message">Data absensi akan diupdate oleh ketua kelas</p>';
                 return;
             }
             
@@ -2029,82 +2063,8 @@
             });
         }
         
-        // Fungsi untuk menampilkan statistik absensi
-        function showAttendanceStats() {
-            const selectedMonth = document.getElementById('stats-month').value;
-            const listContainer = document.getElementById('student-stats-list');
-            
-            // Filter data berdasarkan bulan yang dipilih
-            const filteredData = attendanceData.filter(record => {
-                const recordMonth = new Date(record.date).getMonth() + 1;
-                return recordMonth.toString() === selectedMonth;
-            });
-            
-            // Hitung statistik keseluruhan
-            const totalDays = new Date(2023, selectedMonth, 0).getDate(); // Jumlah hari dalam bulan
-            const presentCount = filteredData.filter(a => a.status === 'present').length;
-            const lateCount = filteredData.filter(a => a.status === 'late').length;
-            const absentCount = filteredData.filter(a => a.status === 'absent').length;
-            
-            // Hitung persentase kehadiran
-            const totalStudents = 4;
-            const totalPossibleAttendances = totalDays * totalStudents;
-            const actualAttendances = presentCount + lateCount;
-            const attendancePercentage = totalPossibleAttendances > 0 ? 
-                Math.round((actualAttendances / totalPossibleAttendances) * 100) : 0;
-            
-            // Update statistik keseluruhan
-            document.getElementById('avg-attendance').textContent = `${attendancePercentage}%`;
-            document.getElementById('total-late').textContent = lateCount;
-            document.getElementById('total-absent').textContent = absentCount;
-            
-            // Hitung statistik per siswa
-            const students = [
-                { id: 1, name: "Pratama Wijaya (Tama)" },
-                { id: 2, name: "Iqbal Mahdani" },
-                { id: 3, name: "Ferzio" },
-                { id: 4, name: "Aldo Bastian" }
-            ];
-            
-            listContainer.innerHTML = '';
-            
-            students.forEach(student => {
-                const studentRecords = filteredData.filter(record => record.studentId === student.id);
-                const present = studentRecords.filter(r => r.status === 'present').length;
-                const late = studentRecords.filter(r => r.status === 'late').length;
-                const absent = studentRecords.filter(r => r.status === 'absent').length;
-                const total = present + late + absent;
-                const percentage = totalDays > 0 ? Math.round(((present + late) / totalDays) * 100) : 0;
-                
-                const item = document.createElement('div');
-                item.className = 'attendance-item';
-                item.innerHTML = `
-                    <div class="student-name">${student.name}</div>
-                    <div style="flex:1;text-align:center;">${percentage}%</div>
-                    <div style="flex:1;text-align:center;">${present}</div>
-                    <div style="flex:1;text-align:center;">${late}</div>
-                    <div style="flex:1;text-align:center;">${absent}</div>
-                `;
-                listContainer.appendChild(item);
-            });
-            
-            // Tambahkan header
-            const header = document.createElement('div');
-            header.className = 'attendance-item';
-            header.style.fontWeight = 'bold';
-            header.style.backgroundColor = 'rgba(52, 152, 219, 0.1)';
-            header.innerHTML = `
-                <div class="student-name">Nama Siswa</div>
-                <div style="flex:1;text-align:center;">Kehadiran</div>
-                <div style="flex:1;text-align:center;">Hadir</div>
-                <div style="flex:1;text-align:center;">Terlambat</div>
-                <div style="flex:1;text-align:center;">Absen</div>
-            `;
-            listContainer.insertBefore(header, listContainer.firstChild);
-        }
-        
-        // Fungsi untuk menambahkan absensi baru
-        document.getElementById('submit-attendance').addEventListener('click', function() {
+        // Fungsi untuk submit absensi
+        function submitAttendance() {
             const studentSelect = document.getElementById('student-select');
             const statusSelect = document.getElementById('attendance-status');
             const lateReasonInput = document.getElementById('late-reason');
@@ -2164,34 +2124,94 @@
             // Update tampilan
             showTodayAttendance();
             alert('Absensi berhasil disimpan!');
-        });
+        }
         
-        // Event listener untuk filter riwayat
-        document.getElementById('filter-month').addEventListener('change', showAttendanceHistory);
-        document.getElementById('search-history').addEventListener('input', showAttendanceHistory);
+        /* ==================== */
+        /* FITUR TURNAMEN DIGITAL */
+        /* ==================== */
         
-        // Event listener untuk statistik
-        document.getElementById('stats-month').addEventListener('change', showAttendanceStats);
-        
-        // Panggil fungsi untuk menampilkan data saat pertama kali load
-        document.addEventListener('DOMContentLoaded', function() {
-            showTodayAttendance();
-            showAttendanceHistory();
-            showAttendanceStats();
+        // Fungsi untuk menampilkan jadwal turnamen
+        function showTournamentSchedule() {
+            const tab = document.querySelector('#jadwalModal .tab-btn.active').getAttribute('data-tab');
+            const listContainer = document.getElementById(tab);
             
-            // Tambahkan event listener untuk tab absensi
-            document.querySelectorAll('[data-tab^="absensi"]').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    if (this.getAttribute('data-tab') === 'riwayat-absensi') {
-                        showAttendanceHistory();
-                    } else if (this.getAttribute('data-tab') === 'statistik-absensi') {
-                        showAttendanceStats();
-                    } else {
-                        showTodayAttendance();
-                    }
+            const filteredTournaments = tournamentData.filter(t => t.status === tab);
+            
+            if (filteredTournaments.length === 0) {
+                if (tab === 'upcoming') {
+                    listContainer.innerHTML = '<p class="empty-message">Ketua kelas akan mengupdate jadwal turnamen</p>';
+                } else if (tab === 'ongoing') {
+                    listContainer.innerHTML = '<p class="empty-message">Tidak ada turnamen yang sedang berlangsung</p>';
+                } else {
+                    listContainer.innerHTML = '<p class="empty-message">Belum ada turnamen yang selesai</p>';
+                }
+                return;
+            }
+            
+            const ul = listContainer.querySelector('ul.option-list') || document.createElement('ul');
+            ul.className = 'option-list';
+            ul.innerHTML = '';
+            
+            filteredTournaments.forEach(tournament => {
+                const li = document.createElement('li');
+                li.setAttribute('data-detail', `${tournament.title}|Tanggal: ${tournament.date}<br>Waktu: ${tournament.time}<br>${tournament.details}`);
+                li.innerHTML = `
+                    ${tournament.title}
+                    <span class="time-badge">${new Date(tournament.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                    <div class="detail-info"></div>
+                `;
+                ul.appendChild(li);
+            });
+            
+            if (!listContainer.querySelector('ul.option-list')) {
+                listContainer.appendChild(ul);
+            }
+            
+            // Tambahkan event listener untuk detail info
+            document.querySelectorAll('#jadwalModal .option-list li').forEach(item => {
+                item.addEventListener('click', function() {
+                    const detailData = this.getAttribute('data-detail').split('|');
+                    showDetail(this, detailData[0], detailData[1]);
                 });
             });
-        });
+        }
+        
+        // Fungsi untuk menambahkan turnamen baru
+        function addTournament() {
+            const title = document.getElementById('tournament-title').value;
+            const date = document.getElementById('tournament-date').value;
+            const time = document.getElementById('tournament-time').value;
+            const status = document.getElementById('tournament-status').value;
+            const details = document.getElementById('tournament-details').value;
+            
+            if (!title || !date || !time) {
+                alert('Harap isi semua field yang diperlukan');
+                return;
+            }
+            
+            const newId = tournamentData.length > 0 ? 
+                Math.max(...tournamentData.map(t => t.id)) + 1 : 1;
+            
+            tournamentData.push({
+                id: newId,
+                title,
+                date,
+                time,
+                status,
+                details
+            });
+            
+            // Reset form
+            document.getElementById('tournament-title').value = '';
+            document.getElementById('tournament-date').value = '';
+            document.getElementById('tournament-time').value = '';
+            document.getElementById('tournament-status').value = 'upcoming';
+            document.getElementById('tournament-details').value = '';
+            
+            // Update tampilan
+            showTournamentSchedule();
+            alert('Jadwal turnamen berhasil ditambahkan!');
+        }
     </script>
 </body>
 </html>
